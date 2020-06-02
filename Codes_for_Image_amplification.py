@@ -8,8 +8,11 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from skimage import transform, io
 
-positive_img_list = glob.glob("IMG_FOLDER/positive_*.jpg")
-negative_img_list = glob.glob("IMG_FOLDER/negative_*.jpg")
+positiveJpgDir = sys.argv[1]
+negativeJpgDir = sys.argv[2]
+
+positive_img_list = sorted(glob.glob("IMG_FOLDER/positive_*.jpg"))
+negative_img_list = sorted(glob.glob("IMG_FOLDER/negative_*.jpg"))
 
 # Convert jpeg file to numpy array
 pos_imgarr_dict = {}
@@ -31,14 +34,9 @@ shape_hori = pos_imgarr_dict[0].shape[1]
 vert_half, hori_half = int(shape_vert / 8), int(shape_hori / 8)
 vert_half, hori_half
 
-pos_imgarr_dict.keys()
-
-i = 6
-win_size = 100
-target_y, target_x = 390, 490
-
 # center of malberry are decide with direct view.
 #shape_vert = 767, shape_hori = 1024
+
 body_cent_Y_X = {}
 body_cent_Y_X[0] = (350, 500)
 body_cent_Y_X[1] = (370, 470)
@@ -47,6 +45,7 @@ body_cent_Y_X[3] = (370, 730)
 body_cent_Y_X[4] = (405, 470)
 body_cent_Y_X[5] = (180, 660)
 body_cent_Y_X[6] = (390, 490)
+
 
 nearest_point = {i :[(0, body_cent_Y_X[i][1]), (shape_vert, body_cent_Y_X[i][1]), (body_cent_Y_X[i][0], 0), (body_cent_Y_X[i][0], shape_hori) ] for i in range(7)}
 
@@ -81,8 +80,6 @@ left_line  = body_centX - hori_half + hori_move
 right_line = body_centX + hori_half + hori_move
 
 inner_rotate_point = [point for point in rotate_point if (upper_line <= point[0] <= lower_line) and (left_line <= point[1] <= right_line)]
-
-min(body_cent_Y_X[i][0], shape_vert - body_cent_Y_X[i][0], body_cent_Y_X[i][1], shape_hori - body_cent_Y_X[i][1])
 
 ########################
 # United codes revised #
