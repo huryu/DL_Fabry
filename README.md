@@ -11,7 +11,7 @@ DL_Fabry used jpeg-formatted files as training and validation datasets.
 * Python 3.6.5
 * keras
  
-Environments under [Anaconda for Windows](https://www.anaconda.com/distribution/) is tested.
+Environments under [Anaconda for Linux](https://www.anaconda.com/distribution/) is tested.
  
 ```bash
 conda create -n pyxel pip python=3.6 Anaconda
