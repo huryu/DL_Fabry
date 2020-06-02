@@ -12,7 +12,11 @@ from skimage import exposure
 from skimage import transform, io
 
 positiveJpgDir = sys.argv[1]
-negativeJpgDir = sys.argv[2]
+negativeJpgDir = sys.argv[3]
+
+# The path for the folder to save Histequalized vectorized image
+posiHistEqDir = sys.argv[2]
+negaHistEqDir = sys.argv[4]
 
 positive_img_list = sorted(glob.glob(positiveJpgDir + "/*.jpg"))
 negative_img_list = sorted(glob.glob(negativeJpgDir + "/*.jpg"))
@@ -66,7 +70,7 @@ for i in pos_imgarr_dict.keys():
     img_unite[:, :, 1] = img_adapteq_1
     img_unite[:, :, 2] = img_adapteq_2
 
-    np.save("../IMAGE_DIR/Original_images/2018_11_22_Urinary_Images_from_StMarianna/image/Positive_HistEq/" + base_file_name + ".npy", img_unite)
+    np.save(posiHistEqDir + "/" + base_file_name + ".npy", img_unite)
 
 # For negative image histgram equalization
 
@@ -102,4 +106,4 @@ for i in neg_imgarr_dict.keys():
     img_unite[:, :, 1] = img_adapteq_1
     img_unite[:, :, 2] = img_adapteq_2
 
-    np.save("../IMAGE_DIR/Imgr_negative_set/Test_image_negative_2018NovDec/HistEqual_IMG/" + base_file_name + ".npy", img_unite)
+    np.save(negaHistEqDir + "/" + base_file_name + ".npy", img_unite)
