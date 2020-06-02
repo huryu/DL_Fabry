@@ -1,8 +1,7 @@
-#This class should be externalized!!!
-# Originated from "https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly.html"
+# This class is written with the reference, and modified with the author's environment. 
+# Original from "https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly.html"
 
 # If you want to input multiple data (multi_input_model), adjust the output of "def generate"...
-# That function should yield
 
 import numpy as np
 
