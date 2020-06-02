@@ -9,9 +9,11 @@ DL_Fabry used jpeg-formatted files as training and validation datasets.
 These codes are written to detect the Fabry disease with the disease-specific findings from the urine samples.
 
 The sample figures are pre-processed with 
-I)   Codes_for_Positive_Negative_figure_hist_equalizer.py \n
-II)  Codes_for_POSITIVE_SEG_with_HistEqual.py \n
-III) Codes_for_NEGATIVE_SEG_with_HistEqual.py \n
+I)   Codes_for_Positive_Negative_figure_hist_equalizer.py
+
+II)  Codes_for_POSITIVE_SEG_with_HistEqual.py
+
+III) Codes_for_NEGATIVE_SEG_with_HistEqual.py
 
 Then, these processed figures are separated into segments with Codes_for_Image_amplification.py and divided into Training_data or Test_data with Codes_for_Random_Choice.py.
 
