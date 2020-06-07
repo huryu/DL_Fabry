@@ -11,10 +11,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from datetime import datetime
-#%matplotlib inline
 
 #self-made module
-from my_classes_genarator import DataGenerator
+from ImageDataGenarator import DataGenerator
 
 ##################################
 # keras-tensorflow module import #
@@ -69,16 +68,9 @@ predictions = Dense(1, activation='sigmoid')(x)
 
 model = Model(inputs=vgg19_model.input, outputs=predictions)
 
-# VGGからのlayerのうち，15層目までのモデル重みを固定（VGG19のモデル重みを用いる）
+# The weight of 1st to 15th layes in VGG19 was fixed.
 for layer in model.layers[:17]:
      layer.trainable = False
-
-# compile the model
-#model.compile(loss='binary_crossentropy',
-#              optimizer=SGD(lr=1e-3, decay=1e-6, momentum=0.9, nesterov=True),
-#              metrics=['accuracy'])
-
-#binary_crossentropy >> ref to DL_textbook(François Chollet) P135
 
 model.compile(loss='binary_crossentropy',
               optimizer=RMSprop(lr=1e-4),
@@ -90,23 +82,14 @@ model.summary()
 # Prepare for Data Generator #
 ##############################
 
-# img_list作成 glob.glob(*)は，listの再現性はないが，以後のdictの利用により自動的に再現性を担保した
-
 pos_img_list = glob.glob("/mnt/ssd500/uryu/Imgr_5th/POS_HistEq/*")
 neg_img_list = glob.glob("/mnt/ssd500/uryu/Imgr_5th/NEG_HistEq/*")
 BG_pos_list  = glob.glob("/mnt/ssd500/uryu/Imgr_5th/BGfromPOS_HistEq/*")
-
-# pos_img_list[0] は '../../../../../../mnt/ssd500/uryu/Imgr_2nd/Imgr_positive/f_img_1_14659.npy'のようになるので，
-# .npyの直前 14659を keyに，listに含まれる要素をvalueに設定して，辞書を作成する。書き方は下記
-# pos [0,...., 69999], neg [70000, ....., 139999, ], BG_pos [140000, .... ,, 161000] みたいになる。
-# posやneg, BG_posのふくまれる要素が変更されると，これらは変更される。
-# pos >>> neg >>> BG_pos の順番は確定しているので，下記を基本にする。
 
 pos_arr_dict = {(name.split("_")[-1]).split(".")[0] : name for name in pos_img_list}
 neg_arr_dict = {(name.split("_")[-1]).split(".")[0] : name for name in neg_img_list}
 BG_pos_arr_dict  = {(name.split("_")[-1]).split(".")[0] : name for name in BG_pos_list}
 
-# 空のdictを準備
 pos_neg_BG_dict = {}
 
 pos_neg_BG_dict.update(pos_arr_dict)
@@ -120,7 +103,6 @@ print("Number of control images in databases: ", len(neg_arr_dict))
 print("Number of background images from positives in databases: ", len(BG_pos_arr_dict))
 print("Number of total images in databases: ", len(pos_neg_BG_dict))
 
-#ラベルをつくって，辞書化する。
 labels_list = np.concatenate((np.ones(len(pos_arr_dict)), np.zeros(len(neg_arr_dict) + len(BG_pos_arr_dict))), axis = 0)
 labels = {str(ind): elm for ind, elm in enumerate(labels_list)}
 
