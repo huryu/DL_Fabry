@@ -8,16 +8,9 @@ DL_Fabry used jpeg-formatted files as training and validation datasets.
 
 These codes are written to detect the Fabry disease with the disease-specific findings from the urine samples.
 
-The sample figures are pre-processed with 
+The sample figures are pre-processed with Codes_for_Positive_Negative_figure_hist_equalizer.py for adaptive histogram equalization and vectorization. Then, these processed image vectors are randomly separated with segments with PosNegSegMaker.py or BGSegmentsMaker.py for image augmentation.
 
-I)   Codes_for_Positive_Negative_figure_hist_equalizer.py
-
-II)  PosNegSegMaker.py
-
-
-
-Then, these processed figures are divided into Training_data or Test_data with Codes_for_Random_Choice.py.
-
+These segmented images are divided into Training_data or Test_data with Codes_for_Random_Choice.py.
 After that, the training data set are used to train the model of neural network model, which is written in Codes_for_NeuralNetworkTraining.py.
 
 Trained model is evaluated with the test sample images, and these codes are written in Codes_for_model_evaluate_for_Positive_arr.py, and Codes_for_model_evaluate_for_Negative_arr.py.
