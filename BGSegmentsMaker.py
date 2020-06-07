@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
 import os, sys, glob, pickle, math, argparse
 import numpy as np
 from skimage import transform, io
-
-
-# In[ ]:
-
 
 parser = argparse.ArgumentParser(usage='BGSegmentsMaker.py -B <Image Directory for input> -BS <Segments Directory for output>')
 parser.add_argument('-B',  type=str,  help='Specify <Image Directory for input>')
@@ -21,14 +14,7 @@ args = parser.parse_args()
 BGHistEqDirPath = args.B
 BGSegmentDir = args.BS
 
-
-# In[7]:
-
-
 BG_img_list = sorted(glob.glob(BGHistEqDirPath + "/*.npy"))
-
-
-# In[14]:
 
 
 BG_imgarr_dict = {}
@@ -36,17 +22,9 @@ BG_imgarr_dict = {}
 for i, BG_img in enumerate(BG_img_list):
     BG_imgarr_dict[i] = np.load(BG_img)
 
-
-# In[16]:
-
-
 shape_vert = BG_imgarr_dict[0].shape[0]
 shape_hori = BG_imgarr_dict[0].shape[1]
 vert_half, hori_half = math.ceil(shape_vert / 8), math.ceil(shape_hori / 8)
-
-
-# In[47]:
-
 
 # make the number of [(len(BG_img_list)) * 2500] X images of background in the urine sample images of Fabry patient.
 
