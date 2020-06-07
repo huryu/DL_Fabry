@@ -1,22 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 """Randomised segmented positive images with histogram equalization."""
-
-
-# In[2]:
-
 
 import sys, glob, pickle, math, argparse
 import numpy as np
 from skimage import transform
-
-
-# In[3]:
-
 
 parser = argparse.ArgumentParser(usage='PosNegSegMaker.py -P <Positive Image Directory for input> -N <Negative Image Directory for input> -M <Pickled File of Python3 dictionary object> -PS <Positive Segments Directory for output> -NS <Negative Segments Directory for output>')
 parser.add_argument('-P', type=str,  help='Specify <Positive Image Directory>')
@@ -27,10 +16,6 @@ parser.add_argument('-NS', type=str, help='Specify <Negative Segments Directory>
 
 args = parser.parse_args()
 
-
-# In[4]:
-
-
 PosHistEqDirPath = args.P
 NegHistEqDirPath = args.N
 DictPathForCenterOfMulberryCells = args.M
@@ -39,10 +24,6 @@ NegSegmentDir = args.NS
 
 positive_img_list = sorted(glob.glob(PosHistEqDirPath + "/*.npy"))
 negative_img_list = sorted(glob.glob(NegHistEqDirPath + "/*.npy"))
-
-
-# In[ ]:
-
 
 with open(DictPathForCenterOfMulberryCells, mode='rb') as f:
      body_cent_Y_X = pickle.load(f)
@@ -74,10 +55,6 @@ with open(DictPathForCenterOfMulberryCells, mode='rb') as f:
 #                 24: (360, 506),
 #                 25: (360, 520)}
 
-
-# In[ ]:
-
-
 pos_imgarr_dict = {}
 neg_imgarr_dict = {}
 
@@ -87,22 +64,12 @@ for i, pos_img in enumerate(positive_img_list):
 for i, neg_img in enumerate(negative_img_list):
     neg_imgarr_dict[i] = np.load(neg_img)
 
-
-# In[ ]:
-
-
 shape_vert = pos_imgarr_dict[0].shape[0]
 shape_hori = pos_imgarr_dict[0].shape[1]
 vert_half, hori_half = math.ceil(shape_vert / 8), math.ceil(shape_hori / 8)
 
-
-# In[ ]:
-
-
 # make the number of [(len(positive_img_list)) * 5000] X images of malberry negative segments
-
 np_count = 0
-
 while np_count < len(positive_img_list) * 5000:
     i = np.random.randint(0, 25)
 
@@ -130,11 +97,8 @@ while np_count < len(positive_img_list) * 5000:
             np_count += 1
 
 
-# In[ ]:
-
 
 # make the number of [(len(negative_img_list)) * 100] X images of malberry negative segments
-
 np_count = 0
 while np_count < (len(negative_img_list)) * 100:
 
@@ -161,4 +125,3 @@ while np_count < (len(negative_img_list)) * 100:
         if len(color_3ch_black) == 0:
             np.save(NegSegmentDir + "/f_imgN_" + str(i) + "_" + str(np_count), f_img)
             np_count += 1
-
