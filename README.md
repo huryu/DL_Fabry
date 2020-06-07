@@ -11,7 +11,7 @@ These codes are written to detect the Fabry disease with the disease-specific fi
 The sample figures are pre-processed with Codes_for_Positive_Negative_figure_hist_equalizer.py for adaptive histogram equalization and vectorization. Then, these processed image vectors are randomly separated with segments with PosNegSegMaker.py or BGSegmentsMaker.py for image augmentation.
 
 These segmented images are divided into Training_data or Test_data with RandomDivider.py.
-After that, the training data set are used to train the model of neural network model, which is written in Codes_for_NeuralNetworkTraining.py.
+After that, the training data set are used to train the model of neural network model, which is written in DNN_Model_Train.py.
 
 Trained model is evaluated with the test sample images, and these codes are written in Codes_for_model_evaluate_for_Positive_arr.py, and Codes_for_model_evaluate_for_Negative_arr.py.
 
