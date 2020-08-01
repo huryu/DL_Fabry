@@ -28,7 +28,7 @@ Environments under [Anaconda for Linux](https://www.anaconda.com/distribution/) 
 * The codes are written and performed in the setting of Linux server (Ubuntu 18.04) with NVIDIA GPU chips (NVIDIA Tesla P100 / 16GB).
 * In our case, it will take 5 to 6 hours for the training of a model with GPU chips. The training dataset consists of 125000 positive segmented images, 62500 background segmented images, and 184800 negative segmented images, and each segments are vectorized into a (192, 256, 3) shaped vector. 
 * With keras application, you can also perform model training without GPU chips, but it will take substantially longer time than machine with GPU.
-* We have not tried our codes under Windows or Mac operation system, but we assume these python codes can usually execute with both of these environment if you have updated python module in your system.
+* We have not tried our codes under Windows or Mac operation system, but we assume these python codes can usually be executed under both of these environment if you have updated python module in your system.
  
 # Author
  
